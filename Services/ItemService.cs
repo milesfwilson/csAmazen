@@ -39,5 +39,20 @@ namespace csAmazen.Services
     {
       return _repo.GetOne(id);
     }
+
+    internal Item Edit(Item editedItem, Profile userInfo)
+    {
+      Item original = _repo.GetOne(editedItem.Id);
+      if (original == null)
+      {
+        throw new Exception("Does not exist");
+      }
+      if (original.CreatorId != userInfo.Id)
+      {
+        throw new Exception("Access Denied");
+      }
+      _repo.Edit(editedItem);
+      return _repo.GetOne(editedItem.Id);
+    }
   }
 }

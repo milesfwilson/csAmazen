@@ -66,6 +66,23 @@ namespace csAmazen.Controllers
       }
     }
 
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Item>> Edit(int id, [FromBody] Item editedItem)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        editedItem.Id = id;
+        return Ok(_itemService.Edit(editedItem, userInfo));
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
+
+
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {

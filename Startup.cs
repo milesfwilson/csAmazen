@@ -66,8 +66,8 @@ namespace csAmazen
       services.AddScoped<IDbConnection>(x => CreateDbConnection());
       services.AddTransient<ProfileService>();
       services.AddTransient<ProfileRepository>();
-      //   services.AddTransient<JobService>();
-      //   services.AddTransient<JobRepository>();
+      services.AddTransient<ItemService>();
+      services.AddTransient<ItemRepository>();
       //   services.AddTransient<ContractorService>();
       //   services.AddTransient<ContractorRepository>();
       //   services.AddTransient<ContractorJobService>();

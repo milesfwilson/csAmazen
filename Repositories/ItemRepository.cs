@@ -18,9 +18,9 @@ namespace csAmazen.Repositories
     internal int Create(Item newItem)
     {
       string sql = @"INSERT INTO items
-            (title, description, price, salePrice, tags, options, picture, quantity, id, rating, isAvailable, creatorId)
+            (title, description, price, salePrice, picture, quantity, id, rating, isAvailable, creatorId)
             VALUES
-            (@Title, @Description, @Price, @SalePrice, @Tags, @Options, @Picture, @Quantity, @Id, @Rating, @IsAvailable, @CreatorId);
+            (@Title, @Description, @Price, @SalePrice, @Picture, @Quantity, @Id, @Rating, @IsAvailable, @CreatorId);
             SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newItem);
     }
@@ -29,6 +29,22 @@ namespace csAmazen.Repositories
     {
       string sql = @"SELECT * FROM items";
       return _db.Query<Item>(sql);
+    }
+
+    internal void Edit(Item editedItem)
+    {
+      string sql = @"
+      UPDATE items
+      SET
+      title = @Title,
+description = @Description,
+price = @Price,
+salePrice = @SalePrice,
+picture = @Picture,
+quantity = @Quantity,
+rating = @Rating
+WHERE id = @Id;";
+      _db.Execute(sql, editedItem);
     }
 
     internal bool Delete(int id)
@@ -40,7 +56,7 @@ namespace csAmazen.Repositories
 
     internal Item GetOne(int id)
     {
-      string sql = "SELECT * FROM CONTRACTORS WHERE id = @ID LIMIT 1";
+      string sql = "SELECT * FROM items WHERE id = @Id";
       return _db.QueryFirstOrDefault<Item>(sql, new { id });
     }
   }

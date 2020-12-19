@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace csAmazen.Models
 {
   public class Item
@@ -7,8 +9,6 @@ namespace csAmazen.Models
     public decimal Price { get; set; }
     public decimal SalePrice { get; set; }
 
-    public string[] Tags { get; set; }
-    public string[] Options { get; set; }
     public string Picture { get; set; }
     public int Quantity { get; set; }
 
