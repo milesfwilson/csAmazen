@@ -2,7 +2,7 @@
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="container-fluid">
     <router-view v-slot="{Component}">
       <transition name="route" mode="out-in">
         <component :is="Component" />
@@ -11,7 +11,6 @@
   </main>
   <footer>
     <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
     </div>
   </footer>
 </template>

@@ -8,8 +8,10 @@ namespace csAmazen.Repositories
 {
   public class ItemRepository
   {
+
     private readonly IDbConnection _db;
 
+    private readonly string populateCreator = "SELECT item.*, profile.* FROM items item INNER JOIN profiles profile ON item.creatorId = profile.id ";
     public ItemRepository(IDbConnection db)
     {
       _db = db;
@@ -27,8 +29,8 @@ namespace csAmazen.Repositories
 
     internal IEnumerable<Item> Get()
     {
-      string sql = @"SELECT * FROM items";
-      return _db.Query<Item>(sql);
+      string sql = populateCreator;
+      return _db.Query<Item, Profile, Item>(sql, (item, profile) => { item.Creator = profile; return item; }, splitOn: "id");
     }
 
     internal void Edit(Item editedItem)

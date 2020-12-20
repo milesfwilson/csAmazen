@@ -1,19 +1,20 @@
 <template>
-  <div class="about text-center">
-    <h1>Welcome {{ profile.name }}</h1>
-    <img class="rounded" :src="profile.picture" alt="" />
-    <p>{{ profile.email }}</p>
+  <div class="about">
+    <list-component v-for="list in lists" :key="list.id" :list-props="list" />
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from '../AppState'
+import ListComponent from '../components/ListComponent.vue'
 export default {
+  components: { ListComponent },
   name: 'Profile',
   setup() {
     return {
-      profile: computed(() => AppState.profile)
+      profile: computed(() => AppState.profile),
+      lists: computed(() => AppState.lists)
     }
   }
 }

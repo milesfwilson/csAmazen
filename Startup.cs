@@ -68,10 +68,10 @@ namespace csAmazen
       services.AddTransient<ProfileRepository>();
       services.AddTransient<ItemService>();
       services.AddTransient<ItemRepository>();
-      //   services.AddTransient<ContractorService>();
-      //   services.AddTransient<ContractorRepository>();
-      //   services.AddTransient<ContractorJobService>();
-      //   services.AddTransient<ContractorJobRepository>();
+      services.AddTransient<ListService>();
+      services.AddTransient<ListRepository>();
+      services.AddTransient<ListItemService>();
+      services.AddTransient<ListItemRepository>();
     }
 
 

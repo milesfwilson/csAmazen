@@ -22,3 +22,40 @@
 --         ON DELETE CASCADE
 -- )
 
+-- ALTER TABLE items
+-- ADD COLUMN salePrice decimal(10,2);
+
+
+
+    -- CREATE TABLE lists (
+    --     title VARCHAR(255) NOT NULL,
+    --     creatorId VARCHAR(255) NOT NULL,
+    --     id INT NOT NULL AUTO_INCREMENT,
+    --     isPublic TINYINT NOT NULL,
+    --     PRIMARY KEY (id),
+    --         FOREIGN KEY (creatorId)
+    --         REFERENCES profiles(id)
+    --         ON DELETE CASCADE
+    -- )
+
+--     CREATE TABLE listitems(
+--   id INT NOT NULL AUTO_INCREMENT,   
+--   listId INT,
+--   itemId INT,
+--   creatorId VARCHAR(255) NOT NULL,
+
+--   PRIMARY KEY (id),
+
+--   FOREIGN KEY (listId)
+--   REFERENCES lists (id)
+--   ON DELETE CASCADE,
+
+--   FOREIGN KEY (itemId)
+--   REFERENCES items (id)
+--   ON DELETE CASCADE,
+
+--    FOREIGN KEY (creatorId)
+--         REFERENCES profiles(id)
+--         ON DELETE CASCADE
+
+-- )

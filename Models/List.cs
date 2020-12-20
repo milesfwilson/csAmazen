@@ -11,5 +11,7 @@ namespace csAmazen.Models
 
     public bool IsPublic { get; set; }
 
+    public Profile Creator { get; set; }
+
   }
 }
