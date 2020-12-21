@@ -1,11 +1,11 @@
 <template>
-  <div class="about">
-    <div class="row">
+  <div class="about row">
+    <div class="">
       <div class="col-1"></div>
       <div class="col-4">
         <div class="row">
           <div class="col-12">
-            <img src="" alt="">
+            <img :src="item.picture" class="img-fluid" alt="">
           </div>
         </div>
         <div class="row">
@@ -16,9 +16,19 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <select name="" id="">
-              Add to Wishlist
-            </select>
+            <form action="" @submit.prevent="addToList(item.id, state.listId)">
+              <select v-model="state.listId" name="" id="">
+                <option value="" disabled selected>
+                  Add to Wishlist
+                </option>
+                <option v-for="list in lists" :key="list.id" :value="list.id">
+                  {{ list.title }}
+                </option>
+              </select>
+              <button type="submit" class="btn btn-primary">
+                Add
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -26,13 +36,13 @@
         <div class="">
           <div class="col-12 border">
             <h3 class="text-center">
-              Title
+              {{ item.title }}
             </h3>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium illum consequatur cum necessitatibus aliquam officia, tempora facilis odit iure in veritatis. Rerum minus, commodi neque unde explicabo vel dignissimos repellendus?</p>
+            <p>{{ item.description }}</p>
           </div>
         </div>
         <div class="row">
@@ -49,7 +59,7 @@
             </button>
           </div>
           <div class="col-4">
-            Price
+            ${{ item.price }}
           </div>
         </div>
       </div>
@@ -59,10 +69,28 @@
 </template>
 
 <script>
+import { computed, reactive } from 'vue'
+import { AppState } from '../AppState'
+import { listItemService } from '../services/ListItemService'
 export default {
   name: 'About',
   setup() {
-    return {}
+    const state = reactive({
+      listId: null
+    })
+    return {
+      item: computed(() => AppState.activeItem),
+      lists: computed(() => AppState.lists
+      ),
+      state,
+      async addToList(itemId, listId) {
+        const newListItem = {
+          itemId: itemId,
+          listId: listId
+        }
+        listItemService.create(newListItem)
+      }
+    }
   },
   components: {}
 }

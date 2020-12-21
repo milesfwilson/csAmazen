@@ -38,6 +38,10 @@ class ItemService {
       logger.error(error)
     }
   }
+
+  setActiveItem(item) {
+    AppState.activeItem = item
+  }
 }
 
 export const itemService = new ItemService()
