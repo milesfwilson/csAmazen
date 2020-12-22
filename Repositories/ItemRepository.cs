@@ -27,6 +27,18 @@ namespace csAmazen.Repositories
       return _db.ExecuteScalar<int>(sql, newItem);
     }
 
+    internal IEnumerable<Item> getItemsByProfile(string profileId)
+    {
+      string sql = @"
+                SELECT
+                item.*,
+                profile.*
+                FROM items item
+                JOIN profiles profile ON item.creatorId = profile.id
+                WHERE item.creatorID = @profileId;";
+      return _db.Query<Item, Profile, Item>(sql, (item, profile) => { item.Creator = profile; return item; }, new { profileId }, splitOn: "id");
+    }
+
     internal IEnumerable<Item> Get()
     {
       string sql = populateCreator;
@@ -43,6 +55,7 @@ description = @Description,
 price = @Price,
 salePrice = @SalePrice,
 picture = @Picture,
+isAvailable = @IsAvailable,
 quantity = @Quantity,
 rating = @Rating
 WHERE id = @Id;";

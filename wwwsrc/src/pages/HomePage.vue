@@ -1,6 +1,11 @@
 <template>
   <div class="home">
     <div class="col-12">
+      <div class="row">
+        <div class="col-12">
+          <input type="text" v-model="state.query.title" placeholder="Search">
+        </div>
+      </div>
       <div class="row" v-if="profile.id">
         <div class="col-12 d-flex justify-content-center">
           <button class="btn btn-primary m-2"
@@ -26,15 +31,26 @@
 
 <script>
 import HomeItemComponent from '../components/HomeItemComponent.vue'
-import { computed } from 'vue'
+import { computed, reactive, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import CreateItemComponent from '../components/CreateItemComponent.vue'
+import { itemService } from '../services/ItemService'
 export default {
   components: { HomeItemComponent, CreateItemComponent },
   name: 'Home',
   setup() {
+    const state = reactive({
+      query: {
+        title: ''
+      }
+    })
+    onMounted(() => {
+      itemService.get()
+    })
+
     return {
-      items: computed(() => AppState.items),
+      state,
+      items: computed(() => AppState.items.filter(i => i.title.toUpperCase().includes(state.query.title.toUpperCase()))),
       profile: computed(() => AppState.profile)
     }
   }

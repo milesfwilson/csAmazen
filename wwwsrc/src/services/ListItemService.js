@@ -61,6 +61,24 @@ class ListItemService {
       logger.error(error)
     }
   }
+
+  showAllListItems(profileId) {
+    try {
+      AppState.activeListItems = []
+      const myListItems = AppState.listItems.filter(li => li.creatorId === profileId)
+      myListItems.forEach(li => {
+        AppState.items.forEach(i => {
+          if (i.id === li.itemId) {
+            AppState.activeListItems.push(i)
+          }
+        })
+      })
+
+      logger.log(AppState.activeListItems)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 }
 
 export const listItemService = new ListItemService()

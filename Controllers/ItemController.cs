@@ -84,6 +84,7 @@ namespace csAmazen.Controllers
 
 
     [HttpDelete("{id}")]
+    [Authorize]
     public ActionResult<string> Delete(int id)
     {
       try

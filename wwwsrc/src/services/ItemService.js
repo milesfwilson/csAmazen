@@ -4,9 +4,21 @@ import { api } from '../services/AxiosService'
 class ItemService {
   async get() {
     try {
-      const res = await api.get('api/item')
+      if (!AppState.profile.id) {
+        const res = await api.get('api/item')
+        AppState.items = res.data
+      } else if (AppState.profile.id) {
+        this.getAllItems()
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async getAllItems() {
+    try {
+      const res = await api.get('profile/' + AppState.profile.id + '/item')
       AppState.items = res.data
-      logger.log(AppState.items)
     } catch (error) {
       logger.error(error)
     }

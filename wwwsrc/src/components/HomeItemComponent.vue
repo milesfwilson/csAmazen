@@ -3,9 +3,14 @@
     <router-link :to="{name: 'About', params: {itemId: item.id}}" class="text-dark no-decoration" @click="setActiveItem(item)">
       <div class="shadow rounded border bg-light p-1">
         <div :style="'background-image: url('+item.picture+')'" class="bg-img d-flex justify-content-center">
-          <h3 v-if="item.quantity < 1" class="my-auto">
-            UNAVAILABLE
-          </h3>
+          <div class="text-center align-self-center">
+            <h3 v-if="item.quantity < 1" class="">
+              UNAVAILABLE
+            </h3>
+            <h3 v-if="!item.isAvailable">
+              DRAFT
+            </h3>
+          </div>
         </div>
 
         <h4>{{ item.title }}</h4>

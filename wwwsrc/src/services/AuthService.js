@@ -6,6 +6,7 @@ import { setBearer } from './AxiosService'
 import { profileService } from './ProfileService'
 import { itemService } from './ItemService'
 import { listService } from './ListService'
+import { listItemService } from './ListItemService'
 export const AuthService = initialize({
   domain,
   clientId,
@@ -22,8 +23,10 @@ export const AuthService = initialize({
 AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   setBearer(AuthService.bearer)
   await profileService.getProfile()
-  await itemService.get()
+  await itemService.getAllItems()
   await listService.get()
+  await listItemService.get()
+
   AppState.user = AuthService.user
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })

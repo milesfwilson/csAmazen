@@ -4,6 +4,16 @@
       <create-list-component />
     </div>
     <div class="row">
+      <div class="col-4">
+        <div class="shadow rounded p-2 m-2 bg-light justify-content-between d-flex">
+          <h3 @click="showAllListItems(profile.id)" class="my-auto">
+            All
+          </h3>
+          <button class="btn" @click="deleteList(list.id)" disabled>
+            <i class="fa fa-trash-o my-auto text-light" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
       <list-component v-for="list in lists" :key="list.id" :list-props="list" />
     </div>
     <div class="row">
@@ -20,6 +30,7 @@ import { AppState } from '../AppState'
 import ListComponent from '../components/ListComponent.vue'
 import ListItemComponent from '../components/ListItemComponent.vue'
 import createListComponent from '../components/CreateListComponent.vue'
+import { listItemService } from '../services/ListItemService'
 export default {
   components: { ListComponent, ListItemComponent, createListComponent },
   name: 'Profile',
@@ -27,7 +38,11 @@ export default {
     return {
       profile: computed(() => AppState.profile),
       lists: computed(() => AppState.lists),
-      items: computed(() => AppState.activeListItems)
+      items: computed(() => AppState.activeListItems),
+      allListItems: computed(() => AppState.allMyItems),
+      showAllListItems(profileId) {
+        listItemService.showAllListItems(profileId)
+      }
     }
   }
 }

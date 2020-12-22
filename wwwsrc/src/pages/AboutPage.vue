@@ -19,9 +19,15 @@
               </select>
             </div>
             <div class="row justify-content-center">
-              <button type="submit" class="btn btn-outline-dark btn-light w-75 m-2 border-dark">
+              <button type="submit" class="btn btn-outline-dark btn-light w-75 m-2 border-dark" v-if="profile.id">
                 Add to Wishlist
               </button>
+              <button type="submit" class="btn btn-outline-dark btn-light w-75 m-2 border-dark" v-else disabled>
+                Add to Wishlist
+              </button>
+              <p v-if="!profile.id" class="text-danger">
+                Please sign in
+              </p>
             </div>
           </form>
         </div>

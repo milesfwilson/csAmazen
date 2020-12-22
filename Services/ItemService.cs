@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 using csAmazen.Models;
 using csAmazen.Repositories;
 
@@ -23,7 +25,12 @@ namespace csAmazen.Services
 
     internal IEnumerable<Item> Get()
     {
-      return _repo.Get();
+      return _repo.Get().ToList().FindAll(item => item.IsAvailable);
+    }
+
+    internal IEnumerable<Item> GetItemsByProfile(string profileId, string userId)
+    {
+      return _repo.getItemsByProfile(profileId).ToList().FindAll(item => item.CreatorId == userId || item.IsAvailable);
     }
 
     internal string Delete(int id)

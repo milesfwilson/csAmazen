@@ -12,10 +12,12 @@ namespace csAmazen.Controllers
   public class ProfileController : ControllerBase
   {
     private readonly ProfileService _ps;
+    private readonly ItemService _itemService;
 
-    public ProfileController(ProfileService ps)
+    public ProfileController(ProfileService ps, ItemService itemService)
     {
       _ps = ps;
+      _itemService = itemService;
     }
 
     [HttpGet]
@@ -33,6 +35,21 @@ namespace csAmazen.Controllers
 
         return BadRequest(error.Message);
       }
+    }
+
+    [HttpGet("{id}/item")]
+    public async Task<ActionResult<Profile>> GetBlogsByProfile(string id)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_itemService.GetItemsByProfile(id, userInfo?.Id));
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+
     }
 
   }
