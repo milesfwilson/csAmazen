@@ -21,6 +21,17 @@ class ListItemService {
     }
   }
 
+  async inList(itemId) {
+    if (itemId) {
+      for (let i = 0; i < AppState.listItems.length; i++) {
+        if (AppState.listItems[i].itemId === itemId && AppState.profile.id === AppState.listItems[i].creatorId) {
+          logger.log(true, itemId)
+        }
+      }
+      return false
+    }
+  }
+
   async create(newlistItem) {
     try {
       await api.post('api/listItem', newlistItem)
@@ -30,9 +41,12 @@ class ListItemService {
     }
   }
 
-  async deletelistItem(id) {
+  async deletelistItem(itemId, listItemId) {
     try {
-      await api.delete('api/listItem/' + id)
+      logger.log(itemId, listItemId)
+      await api.delete('api/listItem/' + listItemId)
+      const index = AppState.activeListItems.findIndex(i => i.id === itemId)
+      AppState.activeListItems.splice(index, 1)
       this.get()
     } catch (error) {
       logger.error(error)

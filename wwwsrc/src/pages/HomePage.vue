@@ -1,5 +1,5 @@
 <template>
-  <div class="home row">
+  <div class="home">
     <div class="col-12">
       <div class="row" v-if="profile.id">
         <div class="col-12 d-flex justify-content-center">

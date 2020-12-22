@@ -1,9 +1,15 @@
 <template>
-  <div class="about row">
-    <create-list-component />
-    <list-component v-for="list in lists" :key="list.id" :list-props="list" />
-    <div class="col-12">
-      <list-item-component v-for="item in items" :key="item.id" :item-props="item" />
+  <div class="about col-12">
+    <div class="row">
+      <create-list-component />
+    </div>
+    <div class="row">
+      <list-component v-for="list in lists" :key="list.id" :list-props="list" />
+    </div>
+    <div class="row">
+      <div class="col-10 offset-1">
+        <list-item-component v-for="item in items" :key="item.id" :item-props="item" />
+      </div>
     </div>
   </div>
 </template>

@@ -30,7 +30,7 @@ class ItemService {
     }
   }
 
-  async edit(id, editedItem) {
+  async edit(editedItem, id) {
     try {
       await api.put('api/item/' + id, editedItem)
       this.get()

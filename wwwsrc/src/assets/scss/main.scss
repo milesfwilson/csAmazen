@@ -7,17 +7,11 @@
   --grey: #f6f6f6;
 }
 
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: $body-bg;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
+.strike {
+  text-decoration: line-through;
+  color: var(--danger);
+ }
 
-main {
-  flex-grow: 1;
-  display: flex;
-  align-items: stretch;
-}
+ .no-decoration {
+   text-decoration: none;
+ }

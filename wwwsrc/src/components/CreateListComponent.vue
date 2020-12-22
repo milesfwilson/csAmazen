@@ -1,8 +1,8 @@
 <template>
-  <div class="create-list-component">
-    <form action="" @submit.prevent="create(state.newList)">
-      <input type="text" placeholder="title" v-model="state.newList.title">
-      <button type="submit" class="btn btn-primary">
+  <div class="create-list-component col-8 offset-2">
+    <form action="" @submit.prevent="create(state.newList)" class="my-2 d-flex justify-content-center">
+      <input type="text" placeholder="Title" v-model="state.newList.title" class="w-75" required>
+      <button type="submit" class="btn btn-primary mx-2">
         Add
       </button>
     </form>
@@ -24,6 +24,7 @@ export default {
       state,
       create(newList) {
         listService.create(newList)
+        state.newList = {}
       }
     }
   },

@@ -1,15 +1,25 @@
 <template>
-  <div class="home-item-component col-3">
+  <div class="home-item-component col-lg-3 col-md-4 col-6 my-2">
     <router-link :to="{name: 'About', params: {itemId: item.id}}" class="text-dark no-decoration" @click="setActiveItem(item)">
-      <div class="shadow rounded border border-dark m-2 p-2">
-        <img :src="item.picture" class="img-fluid" alt="">
+      <div class="shadow rounded border bg-light p-1">
+        <div :style="'background-image: url('+item.picture+')'" class="bg-img d-flex justify-content-center">
+          <h3 v-if="item.quantity < 1" class="my-auto">
+            UNAVAILABLE
+          </h3>
+        </div>
+
         <h4>{{ item.title }}</h4>
-        <p class="text-center">
-          {{ item.description }}
-        </p>
-        <h6>
-          ${{ item.price }}
-        </h6>
+        <div class="my-2">
+          <i class="fa fa-star text-warning" aria-hidden="true" v-for="star in item.rating" :key="star.length"></i>
+        </div>
+        <div class="d-flex justify-content-around">
+          <h4 :class="{'strike': item.salePrice && item.salePrice < item.price}">
+            ${{ item.price }}
+          </h4>
+          <h4 v-if="item.salePrice > 0">
+            ${{ item.salePrice }}
+          </h4>
+        </div>
       </div>
     </router-link>
   </div>
@@ -36,5 +46,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bg-img {
+height: 30vh;
+background-size: cover;
+background-position: center;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
 
 </style>
