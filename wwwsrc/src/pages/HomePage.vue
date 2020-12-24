@@ -1,27 +1,19 @@
 <template>
   <div class="home">
     <div class="col-12">
-      <div class="row">
-        <div class="col-12">
-          <input type="text" v-model="state.query.title" placeholder="Search">
+      <div class="row my-3">
+        <div class="col-lg-8 offset-lg-2 col-12">
+          <div class="d-flex justify-content-center">
+            <input type="text" class="p-1 w-75" placeholder="Search" v-model="state.query.title">
+            <button class="btn btn-outline-dark mx-2">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+
+            <create-item-component />
+          </div>
         </div>
       </div>
-      <div class="row" v-if="profile.id">
-        <div class="col-12 d-flex justify-content-center">
-          <button class="btn btn-primary m-2"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#createCollapse"
-                  aria-expanded="false"
-                  aria-controls="contentId"
-          >
-            Add New Item
-          </button>
-        </div>
-      </div>
-      <div class="row collapse" id="createCollapse">
-        <create-item-component />
-      </div>
+
       <div class="row">
         <home-item-component v-for="item in items" :key="item.id" :item-props="item" />
       </div>

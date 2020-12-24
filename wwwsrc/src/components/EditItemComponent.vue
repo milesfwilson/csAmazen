@@ -23,7 +23,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="" @submit.prevent="edit(state.editedItem, item.id)" class="">
+            <form action="" @submit.prevent="edit(state.editedItem, item.id)" class="p-2">
               <div class="row">
                 <input class="w-100 p-2 my-1" type="text" placeholder="Title" v-model="state.editedItem.title" required>
               </div>
@@ -63,22 +63,14 @@
                 <input class="p-2 m-1" type="checkbox" placeholder="Publish" v-model="state.editedItem.isAvailable">
               </div>
               <div class="row">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" class="btn btn-primary btn-block mx-2">
                   Save
                 </button>
               </div>
             </form>
 
-            <button @click="deleteItem(item.id)" class="btn btn-danger btn-block">
+            <button @click="deleteItem(item.id)" class="btn btn-danger btn-block w-100">
               Delete
-            </button>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">
-              Save
             </button>
           </div>
         </div>

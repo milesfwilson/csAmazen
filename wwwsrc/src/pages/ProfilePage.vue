@@ -17,6 +17,23 @@
       <list-component v-for="list in lists" :key="list.id" :list-props="list" />
     </div>
     <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10 d-flex justify-content-end">
+        <div>
+          <h6>
+            Your total:
+          </h6>
+          <h4 class="strike">
+            ${{ total(items) }}
+          </h4>
+          <h4>
+            ${{ totalSale(items) }}
+          </h4>
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
+    <div class="row">
       <div class="col-10 offset-1">
         <list-item-component v-for="item in items" :key="item.id" :item-props="item" />
       </div>
@@ -42,6 +59,22 @@ export default {
       allListItems: computed(() => AppState.allMyItems),
       showAllListItems(profileId) {
         listItemService.showAllListItems(profileId)
+      },
+      total(items) {
+        let total = 0
+
+        items.forEach(i => {
+          total += i.price
+        })
+        return total
+      },
+      totalSale(items) {
+        let total = 0
+
+        items.forEach(i => {
+          total += i.salePrice
+        })
+        return total
       }
     }
   }

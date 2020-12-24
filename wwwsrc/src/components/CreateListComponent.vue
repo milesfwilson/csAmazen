@@ -1,8 +1,8 @@
 <template>
-  <div class="create-list-component col-8 offset-2">
+  <div class="create-list-component col-md-8 offset-md-2 col-12">
     <form action="" @submit.prevent="create(state.newList)" class="my-2 d-flex justify-content-center">
       <input type="text" placeholder="Title" v-model="state.newList.title" class="w-75" required>
-      <button type="submit" class="btn btn-primary mx-2">
+      <button type="submit" class="btn btn-outline-primary mx-2">
         Add
       </button>
     </form>

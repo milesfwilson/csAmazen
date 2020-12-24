@@ -20,10 +20,16 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link :to="{ name: 'Home' }" class="nav-link">
-            home
+            Products
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link :to="{ name: 'Profile' }" class="nav-link">
+            Lists
           </router-link>
         </li>
       </ul>
+
       <span class="navbar-text">
         <button
           class="btn btn-outline-primary text-uppercase"
@@ -60,7 +66,7 @@
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
             >
-              logout
+              Logout
             </div>
           </div>
         </div>
