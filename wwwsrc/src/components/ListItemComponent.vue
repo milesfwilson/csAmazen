@@ -13,7 +13,7 @@
       <h6 class="my-1" :class="{'strike': item.salePrice < item.price && item.salePrice > 0}">
         ${{ item.price }}
       </h6>
-      <h6 class="my-1" v-if="item.salePrice">
+      <h6 class="my-1" v-if="(item.salePrice < item.price) && item.salePrice > 0">
         ${{ item.salePrice }}
       </h6>
     </div>

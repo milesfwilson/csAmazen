@@ -21,9 +21,9 @@ namespace csAmazen.Services
       return newList;
     }
 
-    internal IEnumerable<List> Get()
+    internal IEnumerable<List> Get(string profileId)
     {
-      return _repo.Get();
+      return _repo.Get(profileId);
     }
 
     internal string Delete(int id)

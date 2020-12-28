@@ -19,14 +19,14 @@
     <div class="row">
       <div class="col-1"></div>
       <div class="col-10 d-flex justify-content-end">
-        <div>
+        <div v-if="total(items) > 0">
           <h6>
             Your total:
           </h6>
-          <h4 class="strike">
+          <h4 :class="{'strike': (totalSale(items) < total(items)) && (totalSale(items) > 0)}">
             ${{ total(items) }}
           </h4>
-          <h4>
+          <h4 v-if="(totalSale(items) > 0) && (totalSale(items) < total(items))">
             ${{ totalSale(items) }}
           </h4>
         </div>

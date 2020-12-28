@@ -30,6 +30,7 @@ namespace csAmazen.Services
 
     internal IEnumerable<Item> GetItemsByProfile(string profileId, string userId)
     {
+
       return _repo.getItemsByProfile(profileId).ToList().FindAll(item => item.CreatorId == userId || item.IsAvailable);
     }
 

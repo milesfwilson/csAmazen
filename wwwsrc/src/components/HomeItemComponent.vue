@@ -4,10 +4,10 @@
       <div class="shadow rounded border bg-light p-1">
         <div :style="'background-image: url('+item.picture+')'" class="bg-img d-flex justify-content-center">
           <div class="text-center align-self-center">
-            <h3 v-if="item.quantity < 1" class="">
-              UNAVAILABLE
+            <h3 v-if="item.quantity < 1" class="text-danger">
+              OUT OF STOCK
             </h3>
-            <h3 v-if="!item.isAvailable">
+            <h3 v-if="!item.isAvailable" class="text-danger">
               DRAFT
             </h3>
           </div>
@@ -21,7 +21,7 @@
           <h4 :class="{'strike': item.salePrice && item.salePrice < item.price}">
             ${{ item.price }}
           </h4>
-          <h4 v-if="item.salePrice > 0">
+          <h4 v-if="item.salePrice > 0 && item.salePrice < item.price">
             ${{ item.salePrice }}
           </h4>
         </div>

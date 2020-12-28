@@ -34,8 +34,7 @@ namespace csAmazen.Repositories
                 item.*,
                 profile.*
                 FROM items item
-                JOIN profiles profile ON item.creatorId = profile.id
-                WHERE item.creatorID = @profileId;";
+                JOIN profiles profile ON item.creatorId = profile.id;";
       return _db.Query<Item, Profile, Item>(sql, (item, profile) => { item.Creator = profile; return item; }, new { profileId }, splitOn: "id");
     }
 

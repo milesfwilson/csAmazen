@@ -43,11 +43,13 @@ namespace csAmazen.Controllers
     }
     [HttpGet]
 
-    public ActionResult<IEnumerable<List>> Get()
+    public async Task<ActionResult<List>> Get()
     {
       try
       {
-        return Ok(_listService.Get());
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+
+        return Ok(_listService.Get(userInfo.Id));
       }
       catch (System.Exception error)
       {

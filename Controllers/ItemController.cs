@@ -28,8 +28,12 @@ namespace csAmazen.Controllers
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
         newItem.CreatorId = userInfo.Id;
+        if (newItem.SalePrice == 0)
+        {
+          newItem.SalePrice = newItem.Price;
+        }
         Item created = _itemService.Create(newItem);
-        newItem.Creator = userInfo;
+        created.Creator = userInfo;
         return Ok(created);
       }
       catch (System.Exception error)

@@ -18,7 +18,7 @@ class ItemService {
   async getAllItems() {
     try {
       const res = await api.get('profile/' + AppState.profile.id + '/item')
-      AppState.items = res.data
+      logger.log('items', AppState.items = res.data)
     } catch (error) {
       logger.error(error)
     }

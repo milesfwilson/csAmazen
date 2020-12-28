@@ -28,10 +28,10 @@ namespace csAmazen.Repositories
       return _db.ExecuteScalar<int>(sql, newList);
     }
 
-    internal IEnumerable<List> Get()
+    internal IEnumerable<List> Get(string profileId)
     {
-      string sql = populateCreator;
-      return _db.Query<List, Profile, List>(sql, (list, profile) => { list.Creator = profile; return list; }, splitOn: "id");
+      string sql = populateCreator + "WHERE list.creatorId = @profileId";
+      return _db.Query<List, Profile, List>(sql, (list, profile) => { list.Creator = profile; return list; }, new { profileId }, splitOn: "id");
     }
 
     internal void Edit(List editedList)
