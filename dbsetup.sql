@@ -59,3 +59,19 @@
 --         ON DELETE CASCADE
 
 -- )
+--     CREATE TABLE options(
+--   id INT NOT NULL AUTO_INCREMENT,   
+--   itemId INT,
+--   color VARCHAR(255),
+--   creatorId VARCHAR(255) NOT NULL,
+
+--   PRIMARY KEY (id),
+
+--   FOREIGN KEY (itemId)
+--   REFERENCES items (id)
+--   ON DELETE CASCADE,
+
+--    FOREIGN KEY (creatorId)
+--         REFERENCES profiles(id)
+--         ON DELETE CASCADE
+-- )

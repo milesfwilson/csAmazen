@@ -4,21 +4,23 @@
       <create-list-component />
     </div>
     <div class="row">
-      <div class="col-4">
-        <div class="shadow rounded p-2 m-2 bg-light justify-content-between d-flex">
+      <div class="col-md-3 col-12">
+        <div class="shadow rounded btn btn-dark justify-content-between d-flex my-1 list">
           <h3 @click="showAllListItems(profile.id)" class="my-auto">
             All
           </h3>
-          <button class="btn" @click="deleteList(list.id)" disabled>
-            <i class="fa fa-trash-o my-auto text-light" aria-hidden="true"></i>
-          </button>
         </div>
       </div>
       <list-component v-for="list in lists" :key="list.id" :list-props="list" />
     </div>
     <div class="row">
+      <div class="col-10 offset-1">
+        <list-item-component v-for="item in items" :key="item.id" :item-props="item" />
+      </div>
+    </div>
+    <div class="row">
       <div class="col-1"></div>
-      <div class="col-10 d-flex justify-content-end">
+      <div class="col-10 d-flex justify-content-center">
         <div v-if="total(items) > 0">
           <h6>
             Your total:
@@ -32,11 +34,6 @@
         </div>
       </div>
       <div class="col-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-10 offset-1">
-        <list-item-component v-for="item in items" :key="item.id" :item-props="item" />
-      </div>
     </div>
   </div>
 </template>
@@ -66,7 +63,7 @@ export default {
         items.forEach(i => {
           total += i.price
         })
-        return total
+        return total.toFixed(2)
       },
       totalSale(items) {
         let total = 0
@@ -74,7 +71,7 @@ export default {
         items.forEach(i => {
           total += i.salePrice
         })
-        return total
+        return total.toFixed(2)
       }
     }
   }

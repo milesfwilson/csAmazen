@@ -11,31 +11,26 @@ namespace csAmazen.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class ItemController : ControllerBase
+  public class OptionController : ControllerBase
   {
-    private readonly ItemService _itemService;
     private readonly OptionService _optionService;
 
-    public ItemController(ItemService itemService, OptionService optionService)
+    public OptionController(OptionService optionService)
     {
-      _itemService = itemService;
       _optionService = optionService;
     }
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Item>> Create([FromBody] Item newItem)
+    public async Task<ActionResult<Option>> Create([FromBody] Option newOption)
     {
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        newItem.CreatorId = userInfo.Id;
-        if (newItem.SalePrice == 0)
-        {
-          newItem.SalePrice = newItem.Price;
-        }
-        Item created = _itemService.Create(newItem);
-        created.Creator = userInfo;
+        newOption.CreatorId = userInfo.Id;
+
+        Option created = _optionService.Create(newOption);
+
         return Ok(created);
       }
       catch (System.Exception error)
@@ -46,11 +41,11 @@ namespace csAmazen.Controllers
     }
     [HttpGet]
 
-    public ActionResult<IEnumerable<Item>> Get()
+    public ActionResult<IEnumerable<Option>> Get()
     {
       try
       {
-        return Ok(_itemService.Get());
+        return Ok(_optionService.Get());
       }
       catch (System.Exception error)
       {
@@ -60,41 +55,27 @@ namespace csAmazen.Controllers
 
     [HttpGet("{id}")]
 
-    public ActionResult<IEnumerable<Item>> GetOne(int id)
+    public ActionResult<IEnumerable<Option>> GetOne(int id)
     {
       try
       {
-        return Ok(_itemService.GetOne(id));
+        return Ok(_optionService.GetOne(id));
       }
       catch (System.Exception error)
       {
-        return BadRequest(error.Message);
-      }
-    }
-
-    [HttpGet("{id}/option")]
-    public ActionResult<IEnumerable<Option>> GetOptionsByItemId(int id)
-    {
-      try
-      {
-        return Ok(_optionService.GetOptionsByItemId(id));
-      }
-      catch (System.Exception error)
-      {
-
         return BadRequest(error.Message);
       }
     }
 
     [HttpPut("{id}")]
     [Authorize]
-    public async Task<ActionResult<Item>> Edit(int id, [FromBody] Item editedItem)
+    public async Task<ActionResult<Option>> Edit(int id, [FromBody] Option editedOption)
     {
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        editedItem.Id = id;
-        return Ok(_itemService.Edit(editedItem, userInfo));
+        editedOption.Id = id;
+        return Ok(_optionService.Edit(editedOption, userInfo));
       }
       catch (System.Exception error)
       {
@@ -109,7 +90,7 @@ namespace csAmazen.Controllers
     {
       try
       {
-        return Ok(_itemService.Delete(id));
+        return Ok(_optionService.Delete(id));
       }
       catch (System.Exception error)
       {

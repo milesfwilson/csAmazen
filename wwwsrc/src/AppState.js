@@ -10,5 +10,6 @@ export const AppState = reactive({
   myLists: [],
   activeItem: {},
   listItems: [],
-  activeListItems: []
+  activeListItems: [],
+  activeOptions: []
 })

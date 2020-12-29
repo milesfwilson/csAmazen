@@ -15,6 +15,15 @@ class ItemService {
     }
   }
 
+  async getOne(id) {
+    try {
+      const res = await api.get('api/item/' + id)
+      AppState.activeItem = res.data
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
   async getAllItems() {
     try {
       const res = await api.get('profile/' + AppState.profile.id + '/item')

@@ -72,6 +72,8 @@ namespace csAmazen
       services.AddTransient<ListRepository>();
       services.AddTransient<ListItemService>();
       services.AddTransient<ListItemRepository>();
+      services.AddTransient<OptionService>();
+      services.AddTransient<OptionRepository>();
     }
 
 

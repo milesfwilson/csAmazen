@@ -1,11 +1,11 @@
 <template>
-  <div class="list-component col-4">
-    <div class="shadow rounded p-2 m-2 bg-light justify-content-between d-flex">
+  <div class="list-component col-12 col-md-3">
+    <div class="shadow rounded btn btn-dark justify-content-between d-flex my-1 list">
       <h3 @click="getActiveListItems(list.id)" class="my-auto">
         {{ list.title }}
       </h3>
       <button class="btn" @click="deleteList(list.id)">
-        <i class="fa fa-trash-o my-auto" aria-hidden="true"></i>
+        <i class="fa fa-trash-o my-auto text-light" aria-hidden="true"></i>
       </button>
     </div>
   </div>
