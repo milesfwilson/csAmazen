@@ -26,7 +26,7 @@
           </div>
           <div class="modal-body">
             <form class="form d-flex justify-content-center" @submit.prevent="create(item.id, state.newOption)">
-              <input type="text" v-model="state.newOption.color" placeholder="Select a Color" required>
+              <input type="color" v-model="state.newOption.color" placeholder="Select a Color" required>
 
               <button type="submit" class="btn btn-primary">
                 Submit

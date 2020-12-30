@@ -5,17 +5,17 @@
     </div>
     <div class="row">
       <div class="col-md-3 col-12">
-        <div class="shadow rounded btn btn-dark justify-content-between d-flex my-1 list">
+        <div class="shadow rounded btn btn-dark justify-content-between d-flex my-1 list grow">
           <h3 @click="showAllListItems(profile.id)" class="my-auto">
             All
           </h3>
         </div>
       </div>
-      <list-component v-for="list in lists" :key="list.id" :list-props="list" />
+      <list-component v-for="list in lists" :key="'list'+list.id" :list-props="list" />
     </div>
     <div class="row">
       <div class="col-10 offset-1">
-        <list-item-component v-for="item in items" :key="item.id" :item-props="item" />
+        <list-item-component v-for="item in items" :key="'item'+item.id" :item-props="item" />
       </div>
     </div>
     <div class="row">
@@ -25,10 +25,10 @@
           <h6>
             Your total:
           </h6>
-          <h4 :class="{'strike': (totalSale(items) < total(items)) && (totalSale(items) > 0)}">
+          <h4 :class="{'strike': (totalSale(items) > 0)}">
             ${{ total(items) }}
           </h4>
-          <h4 v-if="(totalSale(items) > 0) && (totalSale(items) < total(items))">
+          <h4>
             ${{ totalSale(items) }}
           </h4>
         </div>

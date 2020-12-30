@@ -1,7 +1,7 @@
 <template>
   <div class="home-item-component col-lg-3 col-md-4 col-6 my-2">
     <router-link :to="{name: 'About', params: {itemId: item.id}}" class="text-dark no-decoration" @click="setActiveItem(item)">
-      <div class="shadow rounded border bg-light p-1">
+      <div class="shadow rounded border bg-light p-1 grow">
         <div :style="'background-image: url('+item.picture+')'" class="bg-img d-flex justify-content-center">
           <div class="text-center align-self-center">
             <h3 v-if="item.quantity < 1" class="text-danger">
@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .bg-img {
 height: 30vh;
 background-size: cover;

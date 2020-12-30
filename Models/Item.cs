@@ -21,10 +21,15 @@ namespace csAmazen.Models
 
     public Profile Creator { get; set; }
 
+
+
   }
 
   public class ListItemViewModel : Item
   {
     public int ListItemId { get; set; }
+
+    // public Option Option { get; set; }
+
   }
 }

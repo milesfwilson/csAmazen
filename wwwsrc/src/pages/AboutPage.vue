@@ -3,8 +3,12 @@
     <div class="col-1 d-flex justify-content-end">
       <div class="d-flex flex-column">
         <create-option-component :item-props="item" />
-        <div v-for="option in options" :key="option.id">
-          <div :class="option.color" class="rounded-circle m-2 shadow" style="height: 40px; width: 40px;"></div>
+        <div v-for="option in options" :key="option.color">
+          <div :class="{'selected': state.option === option.id}" class="rounded-circle m-2 grow" :style="'height: 40px; width: 40px;' + 'background-color: ' + option.color + ';'" @click="activeOption(option.id)">
+            <button class="btn move-left" @click="deleteOption(option.id)" v-if="profile.id == option.creatorId">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -17,7 +21,7 @@
 
       <div class="row">
         <div class="col-12">
-          <form class="form" @submit.prevent="addToList(item.id, state.listId)">
+          <form class="form" @submit.prevent="addToList(item.id, state.listId, state.option)">
             <div class="row justify-content-center">
               <select v-model="state.listId"
                       name=""
@@ -35,7 +39,7 @@
               </select>
             </div>
             <div class="row justify-content-center">
-              <button type="submit" class="btn btn-outline-dark btn-light w-75 m-2 border-dark" v-if="profile.id">
+              <button type="submit" class="btn btn-outline-dark btn-light w-75 m-2 border-dark" v-if="profile.id && state.option">
                 Add to Wishlist
               </button>
               <button type="submit" class="btn btn-outline-dark btn-light w-75 m-2 border-dark" v-else disabled>
@@ -80,7 +84,7 @@
             <p :class="{'strike': item.salePrice && item.salePrice < item.price}">
               ${{ item.price }}
             </p>
-            <p v-if="item.salePrice > 0">
+            <p v-if="item.salePrice > 0 && item.salePrice < item.price">
               ${{ item.salePrice }}
             </p>
           </div>
@@ -111,7 +115,8 @@ export default {
   name: 'About',
   setup() {
     const state = reactive({
-      listId: null
+      listId: null,
+      option: null
     })
     const route = useRoute()
     onMounted(() => {
@@ -125,12 +130,15 @@ export default {
       profile: computed(() => AppState.profile),
       options: computed(() => AppState.activeOptions),
       state,
-      async addToList(itemId, listId) {
+      async addToList(itemId, listId, optionId) {
         const newListItem = {
           itemId: itemId,
-          listId: listId
+          listId: listId,
+          optionId: optionId
         }
+
         listItemService.create(newListItem)
+        state.option = null
       },
       async inList(itemId) {
         listItemService.inList(itemId)
@@ -142,6 +150,15 @@ export default {
         } else {
           listItemService.showAllListItems(AppState.profile.id)
         }
+      },
+      async deleteOption(optionId) {
+        optionService.deleteOption(optionId)
+
+        const index = AppState.activeOptions.findIndex(o => o.id === optionId)
+        AppState.activeOptions.splice(index, 1)
+      },
+      async activeOption(id) {
+        state.option = id
       }
     }
   },
@@ -149,11 +166,23 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .bg-img {
   width: 20em;
 height: 20em;
 background-position: center;
 background-size: cover;
 }
+
+.move-left {
+  position: relative;
+  right: 25px;
+  top: 20px;
+}
+
+.selected {
+  border: 3px solid white;
+ box-shadow: 0 0 10px rgb(27, 27, 27);
+}
+
 </style>

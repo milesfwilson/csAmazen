@@ -7,6 +7,8 @@ namespace csAmazen.Models
     public string CreatorId { get; set; }
     public int Id { get; set; }
 
+    public int OptionId { get; set; }
+
     public Profile Creator { get; set; }
   }
 }

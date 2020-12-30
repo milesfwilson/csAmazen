@@ -1,12 +1,15 @@
 <template>
-  <div class="list-item-component row my-2 border shadow rounded bg-light">
+  <div class="list-item-component row my-2 border shadow rounded bg-light grow">
     <div class="col-2">
       <router-link :to="{name: 'About', params: {itemId: item.id}}" class="text-dark no-decoration" @click="setActiveItem(item)">
         <div :style="'background-image: url('+item.picture+');'" class="bg-img w-50 m-1">
         </div>
       </router-link>
     </div>
-    <div class="col-6 d-flex">
+    <div class="col-1 d-flex flex-column justify-content-center">
+      <i class="fa fa-circle fa-2x" v-if="item.listItemId" :style="'color:'+showOption(item.listItemId)" aria-hidden="true"></i>
+    </div>
+    <div class="col-5 d-flex">
       <h4 class="my-auto">
         <router-link :to="{name: 'About', params: {itemId: item.id}}" class="text-dark no-decoration" @click="setActiveItem(item)">
           {{ item.title }}
@@ -35,6 +38,7 @@
 import { computed } from 'vue'
 import { listItemService } from '../services/ListItemService'
 import { itemService } from '../services/ItemService'
+import { AppState } from '../AppState'
 export default {
   name: 'ListItemComponent',
   props: ['itemProps'],
@@ -46,6 +50,16 @@ export default {
       },
       setActiveItem(item) {
         itemService.setActiveItem(item)
+      },
+      showOption(listItemId) {
+        if (listItemId) {
+          const index = AppState.listItems.findIndex(li => li.id === listItemId)
+          const oId = AppState.listItems[index].optionId
+          const optionIndex = AppState.options.findIndex(o => o.id === oId)
+          return AppState.options[optionIndex].color
+        } else {
+          return '#000000'
+        }
       }
     }
   },
@@ -58,5 +72,9 @@ export default {
   height: 10vh;
   background-position: center;
   background-size: cover;
+}
+
+.no-decoration {
+  text-decoration: none;
 }
 </style>

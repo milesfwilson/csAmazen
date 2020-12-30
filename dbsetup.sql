@@ -42,6 +42,7 @@
 --   id INT NOT NULL AUTO_INCREMENT,   
 --   listId INT,
 --   itemId INT,
+--   optionId INT,
 --   creatorId VARCHAR(255) NOT NULL,
 
 --   PRIMARY KEY (id),
@@ -54,11 +55,17 @@
 --   REFERENCES items (id)
 --   ON DELETE CASCADE,
 
+--   FOREIGN KEY (optionId)
+--   REFERENCES options (id)
+--   ON DELETE CASCADE,
+
 --    FOREIGN KEY (creatorId)
 --         REFERENCES profiles(id)
 --         ON DELETE CASCADE
 
 -- )
+
+
 --     CREATE TABLE options(
 --   id INT NOT NULL AUTO_INCREMENT,   
 --   itemId INT,

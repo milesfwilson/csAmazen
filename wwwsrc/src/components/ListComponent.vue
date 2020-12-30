@@ -1,6 +1,6 @@
 <template>
   <div class="list-component col-12 col-md-3">
-    <div class="shadow rounded btn btn-dark justify-content-between d-flex my-1 list">
+    <div class="shadow rounded btn btn-dark justify-content-between d-flex my-1 list grow">
       <h3 @click="getActiveListItems(list.id)" class="my-auto">
         {{ list.title }}
       </h3>

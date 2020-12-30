@@ -7,6 +7,7 @@ import { profileService } from './ProfileService'
 import { itemService } from './ItemService'
 import { listService } from './ListService'
 import { listItemService } from './ListItemService'
+import { optionService } from './OptionService'
 export const AuthService = initialize({
   domain,
   clientId,
@@ -26,7 +27,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await itemService.getAllItems()
   await listService.get()
   await listItemService.get()
-
+  await optionService.get()
   AppState.user = AuthService.user
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })

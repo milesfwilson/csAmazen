@@ -35,6 +35,7 @@ class ListItemService {
   async create(newlistItem) {
     try {
       await api.post('api/listItem', newlistItem)
+
       this.get()
     } catch (error) {
       logger.error(error)

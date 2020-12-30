@@ -19,3 +19,8 @@
  .list {
    height: 25vh;
  }
+
+ .grow:hover {
+  transform: scale(1.01);
+  transition: all .25s ease-in-out;
+  }

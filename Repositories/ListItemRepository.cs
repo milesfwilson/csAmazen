@@ -21,9 +21,9 @@ namespace csAmazen.Repositories
     {
 
       string sql = @"INSERT INTO listItems
-            (listId, itemId, creatorId, id)
+            (listId, itemId, creatorId, optionId, id)
             VALUES
-            (@listId, @itemId, @creatorId, @id);
+            (@listId, @itemId, @creatorId, @optionId, @id);
             SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newListItem);
     }
@@ -40,7 +40,8 @@ namespace csAmazen.Repositories
       UPDATE listItems
       SET
       itemId = @ItemId,
-      listId = @listId
+      listId = @listId,
+      optionId = @OptionId
 WHERE id = @Id;";
       _db.Execute(sql, editedListItem);
     }
