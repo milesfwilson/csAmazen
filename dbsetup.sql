@@ -22,6 +22,9 @@
 --         ON DELETE CASCADE
 -- )
 
+ALTER TABLE items
+ADD COLUMN tags VARCHAR(255)
+
 -- ALTER TABLE items
 -- ADD COLUMN salePrice decimal(10,2);
 

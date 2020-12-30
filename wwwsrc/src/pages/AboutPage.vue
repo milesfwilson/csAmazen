@@ -71,6 +71,20 @@
           </p>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12">
+          <span v-if="item.tags" class="d-flex justify-content-around">
+            <h6 class="m-1 p-2  text-dark ">
+              Tags:
+            </h6>
+            <div v-for="tag in item.tags.split(', ')" :key="tag">
+              <h6 class="m-1 p-2 rounded bg-light border text-muted shadow">
+                {{ tag }}
+              </h6>
+            </div>
+          </span>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-4">

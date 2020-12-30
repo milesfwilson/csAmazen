@@ -54,9 +54,11 @@ export default {
       showOption(listItemId) {
         if (listItemId) {
           const index = AppState.listItems.findIndex(li => li.id === listItemId)
-          const oId = AppState.listItems[index].optionId
-          const optionIndex = AppState.options.findIndex(o => o.id === oId)
-          return AppState.options[optionIndex].color
+          if (AppState.listItems[index]) {
+            const oId = AppState.listItems[index].optionId
+            const optionIndex = AppState.options.findIndex(o => o.id === oId)
+            return AppState.options[optionIndex].color
+          }
         } else {
           return '#000000'
         }

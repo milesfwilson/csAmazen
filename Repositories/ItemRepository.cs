@@ -20,9 +20,9 @@ namespace csAmazen.Repositories
     internal int Create(Item newItem)
     {
       string sql = @"INSERT INTO items
-            (title, description, price, salePrice, picture, quantity, id, rating, isAvailable, creatorId)
+            (title, description, price, salePrice, picture, quantity, id, rating, isAvailable, creatorId, tags)
             VALUES
-            (@Title, @Description, @Price, @SalePrice, @Picture, @Quantity, @Id, @Rating, @IsAvailable, @CreatorId);
+            (@Title, @Description, @Price, @SalePrice, @Picture, @Quantity, @Id, @Rating, @IsAvailable, @CreatorId, @Tags);
             SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newItem);
     }
@@ -56,7 +56,8 @@ salePrice = @SalePrice,
 picture = @Picture,
 isAvailable = @IsAvailable,
 quantity = @Quantity,
-rating = @Rating
+rating = @Rating,
+tags = @Tags
 WHERE id = @Id;";
       _db.Execute(sql, editedItem);
     }

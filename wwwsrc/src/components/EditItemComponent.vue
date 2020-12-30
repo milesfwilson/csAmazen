@@ -59,8 +59,11 @@
                 <input class="w-100 p-2 my-1" type="number" placeholder="Rating" v-model="state.editedItem.rating" required>
               </div>
               <div class="row">
+                <input class="w-100 p-2 my-1" type="text" placeholder="Tags (Seperated by Commas)" v-model="state.editedItem.tags" required>
+              </div>
+              <div class="row">
                 <label for="">Publish</label>
-                <input class="p-2 m-1" type="checkbox" placeholder="Publish" v-model="state.editedItem.isAvailable">
+                <input class="p-2 m-1" type="checkbox" v-model="state.editedItem.isAvailable">
               </div>
               <div class="row">
                 <button type="submit" class="btn btn-primary btn-block mx-2">

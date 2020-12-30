@@ -42,7 +42,7 @@ export default {
 
     return {
       state,
-      items: computed(() => AppState.items.filter(i => i.title.toUpperCase().includes(state.query.title.toUpperCase()))),
+      items: computed(() => AppState.items.filter(i => i.title.toUpperCase().includes(state.query.title.toUpperCase()) || i.tags.toUpperCase().includes(state.query.title.toUpperCase()) || i.description.toUpperCase().includes(state.query.title.toUpperCase()))),
       profile: computed(() => AppState.profile)
     }
   }

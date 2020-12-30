@@ -21,7 +21,7 @@ namespace csAmazen.Models
 
     public Profile Creator { get; set; }
 
-
+    public string Tags { get; set; }
 
   }
 
